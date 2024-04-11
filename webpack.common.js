@@ -1,4 +1,6 @@
 const path = require('path');
+const Dotenv = require('dotenv-webpack');
+
 
 module.exports = {
   mode: 'development',
@@ -33,10 +35,19 @@ module.exports = {
           // Compiles Sass to CSS
           'sass-loader',
         ],
+      },
+      {
+        test: /\.(svg|png|jpg|gif)$/,
+        include: [
+          path.resolve(__dirname, "resources/images")
+        ],
+        type: "asset/inline"
       }
     ]
   },
-  plugins: [],
+  plugins: [
+    new Dotenv()
+  ],
   resolve: {
     extensions: ['.js', '.jsx'],
   },

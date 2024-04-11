@@ -1,6 +1,10 @@
-const { ipcRenderer } = require('electron');
+const { ipcRenderer, contextBridge } = require('electron');
 
-window.sendNotification = (message) => {
-  ipcRenderer.send('notify', message);
-}
+contextBridge.exposeInMainWorld("e_notification", {
+  sendNotification(message) {
+    console.log("here we are");
+    ipcRenderer.send('notify', message);
+  }
+})
+
 

@@ -1,6 +1,19 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, Notification, ipcMain } = require('electron');
 const path = require('path');
 const isDev = !app.isPackaged;
+const os = require('node:os')
+
+//
+// const reactDevToolsPath = path.join(
+//   os.homedir(),
+//   '\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\fmkadmapgofadopljbjfkapdkoienihi\\5.0.2_9'
+// )
+//
+// app.whenReady().then(async () => {
+//   await session.defaultSession.loadExtension(reactDevToolsPath)
+// })
+
+
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -9,7 +22,8 @@ const createWindow = () => {
     backgroundColor: "white",
     webPreferences: {
       nodeIntegration: false,
-      contextIsolation: false,
+      worldSafeJavaScript: true,
+      contextIsolation: true,
       preload: path.join(__dirname, 'preload.js')
     }
   });
@@ -23,6 +37,10 @@ if(isDev) {
   });
 }
 app.whenReady().then(createWindow);
+
+ipcMain.on('notify', (_, message) => {
+  new Notification({title: 'Notification', body: message}).show();
+})
 
 app.on('window-all-closed', () => {
   if(process.platform !== 'darwin') {
