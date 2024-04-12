@@ -17,7 +17,7 @@ const chatItems = [
 
 const Home = () => {
   const dispatch = useDispatch();
-  const chats = useSelector(({chats}) => chats.items)
+  const chats = useSelector(({chats}) => chats.items);
   const navigate = useNavigate();
   const user = useSelector(({auth}) => auth.user);
 
