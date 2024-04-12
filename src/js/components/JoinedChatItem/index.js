@@ -9,6 +9,7 @@ const JoinedChatItem = ({statusImg, title}) => {
         <img
           src={statusImg}
           alt={title}
+          title={title}
         />
         <span className="status online"></span>
       </div>

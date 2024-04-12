@@ -1,8 +1,12 @@
 import React from "react";
-import {Link, useNavigate } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {logout} from "../../api/auth";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const user = useSelector(({auth}) => auth.user);
 
   return (
     <div className="chat-navbar">
@@ -17,6 +21,12 @@ const Navbar = () => {
             onClick={() => (navigate("/"))}
             className="btn btn-outline-success ml-2">Login
           </button>
+          {user &&
+            <button
+              onClick={() => dispatch(logout())}
+              className="btn btn-outline-danger ml-2">Logout
+            </button>
+          }
         </div>
       </nav>
     </div>

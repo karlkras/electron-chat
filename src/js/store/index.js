@@ -6,7 +6,7 @@ const reducers = combineReducers({
   chats: chatReducer,
   auth: authReducer
 })
-const initStore = middleware1 => {
+const initStore = () => {
   return configureStore({
     reducer: reducers
   },);

@@ -8,6 +8,12 @@ const DEFAULT_STATE = {
 const authReducer = (state = DEFAULT_STATE, action) => {
   if(action) {
     switch(action.type) {
+      case ACTION_TYPE.AUTH_LOGIN_INIT:
+      case ACTION_TYPE.AUTH_REGISTER_INIT:
+        return { ...state, isChecking: true};
+      case ACTION_TYPE.AUTH_REGISTER_SUCCESS:
+      case ACTION_TYPE.AUTH_LOGIN_SUCCESS:
+        return { ...state, isChecking: false};
       case ACTION_TYPE.AUTH_ON_INIT:
         return { user: null, isChecking: true };
       case ACTION_TYPE.AUTH_ON_SUCCESS:

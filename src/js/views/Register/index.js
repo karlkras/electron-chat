@@ -1,12 +1,23 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import FormBody from "../../components/FormBody";
 import RegisterForm from "../../components/RegisterForm";
 import { formDataToJson } from "../../utils";
 import { useDispatch } from "react-redux";
-import { register } from "../../actions/auth";
+import { register } from "../../api/auth";
+import { useSelector } from "react-redux";
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = useSelector(({auth}) => auth.user);
+
+  useEffect(() => {
+    console.log("welcome Register!");
+    if(user) {
+      navigate("/home");
+    }
+  }, [user]);
 
   const submitCallback = evt => {
     evt.preventDefault();

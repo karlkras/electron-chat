@@ -5,7 +5,7 @@ import {HashRouter as Router, Route, Routes} from 'react-router-dom';
 import Navbar from "../components/Navbar";
 import SettingsView from "../views/Settings";
 import RegisterView from "../views/Register";
-import WelcomeView from "../views/Welcome";
+import WelcomeView from "../views/WelcomeView";
 import ChatView from "../views/Chat";
 import { listenToAuthChanges } from "../actions/auth";
 
@@ -16,7 +16,7 @@ const App = () => {
 
   useEffect(() => {
     store.dispatch(listenToAuthChanges());
-  }, []);
+  }, [store.dispatch]);
 
 
   return (
@@ -25,7 +25,7 @@ const App = () => {
         <div className='content-wrapper'>
           <Navbar/>
           <Routes>
-            <Route path="/" element={<WelcomeView/>}/>
+            <Route path="/" element={<WelcomeView/>} exact/>
             <Route path="/home" element={<HomeView/>}/>
             <Route path="/settings" element={<SettingsView/>}/>
             <Route path="/register" element={<RegisterView/>}/>

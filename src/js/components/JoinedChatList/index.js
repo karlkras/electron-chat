@@ -13,7 +13,7 @@ const JoinedChatList = ({chats}) => {
         <ul className="items">
           {chats.map((item) => (
               <li key={item.id} onClick={() => {navigate(`/chat/${item.id}`)}} className="item">
-                <JoinedChatItem title={`Some ${item.name}`} statusImg={item.image}/>
+                <JoinedChatItem title={`${item.name}`} statusImg={item.image}/>
               </li>
             )
           )}

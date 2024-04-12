@@ -4,6 +4,7 @@ import AvailableChatList from "../../components/AvailableChatList";
 import NameContainer from "../../components/NameContainer";
 import { fetchChats } from "../../actions/chat";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from 'react-router-dom';
 
 
 const chatStatusImg = "https://banner2.cleanpng.com/20180627/qvc/kisspng-the-legend-of-zelda-majora-s-mask-discord-compute-discord-icon-5b3371b7b55eb4.6840271215300981037429.jpg";
@@ -17,10 +18,19 @@ const chatItems = [
 const Home = () => {
   const dispatch = useDispatch();
   const chats = useSelector(({chats}) => chats.items)
+  const navigate = useNavigate();
+  const user = useSelector(({auth}) => auth.user);
+
   useEffect(()  => {
+    if(!user) {
+      navigate("/");
+    }
+  }, [user])
+
+  useEffect(()  => {
+    console.log("home")
     dispatch(fetchChats())
   }, [dispatch])
-
 
   return (
     <div className="row no-gutters fh">
